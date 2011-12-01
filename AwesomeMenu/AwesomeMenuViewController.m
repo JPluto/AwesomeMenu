@@ -75,9 +75,9 @@
     [menu release];
 }
 
-- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectAtIndex:(NSInteger)index
 {
-    NSLog(@"Select the index : %d",idx);
+    NSLog(@"Select the index : %d",index);
 }
 
 - (void)viewDidUnload

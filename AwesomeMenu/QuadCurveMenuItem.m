@@ -8,6 +8,7 @@
 
 #import "QuadCurveMenuItem.h"
 static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.size.width - rect.size.width * n)/ 2, (rect.size.height - rect.size.height * n) / 2, rect.size.width * n, rect.size.height * n);}
+
 @implementation QuadCurveMenuItem
 
 @synthesize startPoint = _startPoint;
@@ -17,12 +18,8 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 @synthesize delegate  = _delegate;
 
 #pragma mark - initialization & cleaning up
-- (id)initWithImage:(UIImage *)img 
-   highlightedImage:(UIImage *)himg
-       ContentImage:(UIImage *)cimg
-highlightedContentImage:(UIImage *)hcimg;
-{
-    if (self = [super init]) 
+- (id)initWithImage:(UIImage *)img highlightedImage:(UIImage *)himg ContentImage:(UIImage *)cimg highlightedContentImage:(UIImage *)hcimg {
+    if ((self = [super init])) 
     {
         self.image = img;
         self.highlightedImage = himg;
@@ -56,7 +53,7 @@ highlightedContentImage:(UIImage *)hcimg;
     self.highlighted = YES;
     if ([_delegate respondsToSelector:@selector(quadCurveMenuItemTouchesBegan:)])
     {
-       [_delegate quadCurveMenuItemTouchesBegan:self];
+        [_delegate quadCurveMenuItemTouchesBegan:self];
     }
     
 }
@@ -82,7 +79,6 @@ highlightedContentImage:(UIImage *)hcimg;
             [_delegate quadCurveMenuItemTouchesEnd:self];
         }
     }
-    
 }
 
 #pragma mark - instant methods
@@ -91,6 +87,5 @@ highlightedContentImage:(UIImage *)hcimg;
     [super setHighlighted:highlighted];
     [_contentImageView setHighlighted:highlighted];
 }
-
 
 @end

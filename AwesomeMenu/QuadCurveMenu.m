@@ -15,7 +15,6 @@
 #define STARTPOINT CGPointMake(50, 430)
 #define TIMEOFFSET 0.026f
 
-
 @interface QuadCurveMenu ()
 - (void)_expand;
 - (void)_close;
@@ -24,8 +23,9 @@
 @end
 
 @implementation QuadCurveMenu
-@synthesize expanding = _expanding;
+
 @synthesize delegate = _delegate;
+@synthesize expanding = _expanding;
 @synthesize menusArray = _menusArray;
 
 #pragma mark - initialization & cleaning up
@@ -54,9 +54,9 @@
         
         // add the "Add" Button.
         _addButton = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"story-add-button.png"]
-                                       highlightedImage:[UIImage imageNamed:@"story-add-button-pressed.png"] 
-                                           ContentImage:[UIImage imageNamed:@"story-add-plus.png"] 
-                                highlightedContentImage:[UIImage imageNamed:@"story-add-plus-pressed.png"]];
+                                             highlightedImage:[UIImage imageNamed:@"story-add-button-pressed.png"] 
+                                                 ContentImage:[UIImage imageNamed:@"story-add-plus.png"] 
+                                      highlightedContentImage:[UIImage imageNamed:@"story-add-plus-pressed.png"]];
         _addButton.delegate = self;
         _addButton.center = STARTPOINT;
         [self addSubview:_addButton];
@@ -71,7 +71,6 @@
     [super dealloc];
 }
 
-                               
 #pragma mark - UIView's methods
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
@@ -121,7 +120,7 @@
             continue;
         }
         [otherItem.layer addAnimation:shrink forKey:@"shrink"];
-
+        
         otherItem.center = otherItem.startPoint;
     }
     _expanding = NO;
@@ -132,9 +131,8 @@
         _addButton.transform = CGAffineTransformMakeRotation(angle);
     }];
     
-    if ([_delegate respondsToSelector:@selector(quadCurveMenu:didSelectIndex:)])
-    {
-        [_delegate quadCurveMenu:self didSelectIndex:item.tag - 1000];
+    if ([_delegate respondsToSelector:@selector(quadCurveMenu:didSelectAtIndex:)]) {
+        [_delegate quadCurveMenu:self didSelectAtIndex:item.tag - 1000];
     }
 }
 
@@ -172,10 +170,12 @@
         [self addSubview:item];
     }
 }
+
 - (BOOL)isExpanding
 {
     return _expanding;
 }
+
 - (void)setExpanding:(BOOL)expanding
 {
     _expanding = expanding;    
@@ -194,6 +194,7 @@
         _timer = [[NSTimer scheduledTimerWithTimeInterval:TIMEOFFSET target:self selector:selector userInfo:nil repeats:YES] retain];
     }
 }
+
 #pragma mark - private methods
 - (void)_expand
 {
@@ -234,7 +235,6 @@
     item.center = item.endPoint;
     
     _flag ++;
-    
 }
 
 - (void)_close
@@ -248,7 +248,7 @@
     }
     
     int tag = 1000 + _flag;
-     QuadCurveMenuItem *item = (QuadCurveMenuItem *)[self viewWithTag:tag];
+    QuadCurveMenuItem *item = (QuadCurveMenuItem *)[self viewWithTag:tag];
     
     CAKeyframeAnimation *rotateAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotateAnimation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0f],[NSNumber numberWithFloat:M_PI * 2],[NSNumber numberWithFloat:0.0f], nil];
@@ -257,7 +257,7 @@
                                 [NSNumber numberWithFloat:.0], 
                                 [NSNumber numberWithFloat:.4],
                                 [NSNumber numberWithFloat:.5], nil]; 
-        
+    
     CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     positionAnimation.duration = 0.5f;
     CGMutablePathRef path = CGPathCreateMutable();
@@ -293,7 +293,7 @@
     animationgroup.animations = [NSArray arrayWithObjects:positionAnimation, scaleAnimation, opacityAnimation, nil];
     animationgroup.duration = 0.3f;
     animationgroup.fillMode = kCAFillModeForwards;
-
+    
     return animationgroup;
 }
 
@@ -316,6 +316,5 @@
     
     return animationgroup;
 }
-
 
 @end
