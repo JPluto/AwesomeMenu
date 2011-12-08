@@ -10,19 +10,6 @@
 
 @implementation AwesomeMenuViewController
 
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
@@ -57,6 +44,10 @@
 
 - (void)tappedInStoryMenu:(StoryMenu *)storyMenu didSelectAtIndex:(NSInteger)index {
     NSLog(@"Select the index : %d",index);
+}
+
+- (void)dealloc {
+    [super dealloc];
 }
 
 @end

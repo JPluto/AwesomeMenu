@@ -2,7 +2,7 @@
 //  StoryMenu.m
 //  AwesomeMenu
 //
-//  Created by Joy.Chiang on 11/30/11.
+//  Created by Joy Chiang on 11-12-1.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
