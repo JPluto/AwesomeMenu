@@ -40,8 +40,8 @@
 		26A560101487876600FDE5A0 /* story-sleep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A55FF81487876600FDE5A0 /* story-sleep@2x.png */; };
 		26A560111487876600FDE5A0 /* story-thought.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A55FF91487876600FDE5A0 /* story-thought.png */; };
 		26A560121487876600FDE5A0 /* story-thought@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 26A55FFA1487876600FDE5A0 /* story-thought@2x.png */; };
-		26A560171487878000FDE5A0 /* QuadCurveMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A560141487878000FDE5A0 /* QuadCurveMenu.m */; };
-		26A560181487878000FDE5A0 /* QuadCurveMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A560161487878000FDE5A0 /* QuadCurveMenuItem.m */; };
+		26A560171487878000FDE5A0 /* StoryMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A560141487878000FDE5A0 /* StoryMenu.m */; };
+		26A560181487878000FDE5A0 /* StoryMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A560161487878000FDE5A0 /* StoryMenuItem.m */; };
 		26A5601A148787D900FDE5A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26A56019148787D900FDE5A0 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,10 +84,10 @@
 		26A55FF81487876600FDE5A0 /* story-sleep@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-sleep@2x.png"; path = "AwesomeMenu/story-sleep@2x.png"; sourceTree = "<group>"; };
 		26A55FF91487876600FDE5A0 /* story-thought.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-thought.png"; path = "AwesomeMenu/story-thought.png"; sourceTree = "<group>"; };
 		26A55FFA1487876600FDE5A0 /* story-thought@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "story-thought@2x.png"; path = "AwesomeMenu/story-thought@2x.png"; sourceTree = "<group>"; };
-		26A560131487878000FDE5A0 /* QuadCurveMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadCurveMenu.h; sourceTree = "<group>"; };
-		26A560141487878000FDE5A0 /* QuadCurveMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadCurveMenu.m; sourceTree = "<group>"; };
-		26A560151487878000FDE5A0 /* QuadCurveMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadCurveMenuItem.h; sourceTree = "<group>"; };
-		26A560161487878000FDE5A0 /* QuadCurveMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadCurveMenuItem.m; sourceTree = "<group>"; };
+		26A560131487878000FDE5A0 /* StoryMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; path = StoryMenu.h; sourceTree = "<group>"; };
+		26A560141487878000FDE5A0 /* StoryMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryMenu.m; sourceTree = "<group>"; };
+		26A560151487878000FDE5A0 /* StoryMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; path = StoryMenuItem.h; sourceTree = "<group>"; };
+		26A560161487878000FDE5A0 /* StoryMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryMenuItem.m; sourceTree = "<group>"; };
 		26A56019148787D900FDE5A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -144,10 +144,10 @@
 				26A55FD71487872300FDE5A0 /* AwesomeMenuViewController.h */,
 				26A55FD81487872300FDE5A0 /* AwesomeMenuViewController.m */,
 				26A55FDA1487872300FDE5A0 /* AwesomeMenuViewController.xib */,
-				26A560131487878000FDE5A0 /* QuadCurveMenu.h */,
-				26A560141487878000FDE5A0 /* QuadCurveMenu.m */,
-				26A560151487878000FDE5A0 /* QuadCurveMenuItem.h */,
-				26A560161487878000FDE5A0 /* QuadCurveMenuItem.m */,
+				26A560131487878000FDE5A0 /* StoryMenu.h */,
+				26A560141487878000FDE5A0 /* StoryMenu.m */,
+				26A560151487878000FDE5A0 /* StoryMenuItem.h */,
+				26A560161487878000FDE5A0 /* StoryMenuItem.m */,
 				26A55FC91487872300FDE5A0 /* Supporting Files */,
 			);
 			path = AwesomeMenu;
@@ -282,8 +282,8 @@
 				26A55FD01487872300FDE5A0 /* main.m in Sources */,
 				26A55FD31487872300FDE5A0 /* AwesomeMenuAppDelegate.m in Sources */,
 				26A55FD91487872300FDE5A0 /* AwesomeMenuViewController.m in Sources */,
-				26A560171487878000FDE5A0 /* QuadCurveMenu.m in Sources */,
-				26A560181487878000FDE5A0 /* QuadCurveMenuItem.m in Sources */,
+				26A560171487878000FDE5A0 /* StoryMenu.m in Sources */,
+				26A560181487878000FDE5A0 /* StoryMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +396,7 @@
 				26A55FE11487872300FDE5A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

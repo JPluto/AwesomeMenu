@@ -28,69 +28,35 @@
 {
     [super viewDidLoad];
     
-    UIImage *storyMenuItemImage = [UIImage imageNamed:@"story-button.png"];
-    UIImage *storyMenuItemImagePressed = [UIImage imageNamed:@"story-button-pressed.png"];
+    // 按钮选中与不选中图片
+    UIImage *backgroundImage = [UIImage imageNamed:@"story-button.png"];
+    UIImage *highlightedBackgroundImage = [UIImage imageNamed:@"story-button-pressed.png"];
     
-    // Camera MenuItem.
-    QuadCurveMenuItem *cameraMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                highlightedImage:storyMenuItemImagePressed 
-                                                                    ContentImage:[UIImage imageNamed:@"story-camera.png"] 
-                                                         highlightedContentImage:nil];   
-    // People MenuItem.
-    QuadCurveMenuItem *peopleMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                highlightedImage:storyMenuItemImagePressed 
-                                                                    ContentImage:[UIImage imageNamed:@"story-people.png"] 
-                                                         highlightedContentImage:nil];    
-    // Place MenuItem.
-    QuadCurveMenuItem *placeMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                               highlightedImage:storyMenuItemImagePressed 
-                                                                   ContentImage:[UIImage imageNamed:@"story-place.png"] 
-                                                        highlightedContentImage:nil];    
-    // Music MenuItem.
-    QuadCurveMenuItem *musicMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                               highlightedImage:storyMenuItemImagePressed 
-                                                                   ContentImage:[UIImage imageNamed:@"story-music.png"] 
-                                                        highlightedContentImage:nil];    
-    // Thought MenuItem.
-    QuadCurveMenuItem *thoughtMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                                 highlightedImage:storyMenuItemImagePressed 
-                                                                     ContentImage:[UIImage imageNamed:@"story-thought.png"] 
-                                                          highlightedContentImage:nil];   
-    // Sleep MenuItem.
-    QuadCurveMenuItem *sleepMenuItem = [[QuadCurveMenuItem alloc] initWithImage:storyMenuItemImage
-                                                               highlightedImage:storyMenuItemImagePressed 
-                                                                   ContentImage:[UIImage imageNamed:@"story-sleep.png"] 
-                                                        highlightedContentImage:nil];
+    NSArray *storyImages = [NSArray arrayWithObjects:
+                            [UIImage imageNamed:@"story-camera.png"],
+                            [UIImage imageNamed:@"story-people.png"],
+                            [UIImage imageNamed:@"story-place.png"],
+                            [UIImage imageNamed:@"story-music.png"],
+                            [UIImage imageNamed:@"story-thought.png"],
+                            [UIImage imageNamed:@"story-sleep.png"], nil];
     
-    NSArray *menus = [NSArray arrayWithObjects:cameraMenuItem, peopleMenuItem, placeMenuItem, musicMenuItem, thoughtMenuItem, sleepMenuItem, nil];
-    [cameraMenuItem release];
-    [peopleMenuItem release];
-    [placeMenuItem release];
-    [musicMenuItem release];
-    [thoughtMenuItem release];
-    [sleepMenuItem release];
-    QuadCurveMenu *menu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:menus];
+    NSMutableArray *storyMenusArray = [NSMutableArray array];
+    for (UIImage *storyImage in storyImages) {
+        StoryMenuItem *menuItem = [StoryMenuItem initWithImage:storyImage
+                                                 highlightedImage:nil
+                                                 backgroundImage:backgroundImage
+                                                 highlightedBackgroundImage:highlightedBackgroundImage];
+        [storyMenusArray addObject:menuItem];
+    }
+
+    StoryMenu *menu = [[StoryMenu alloc] initWithFrame:self.view.bounds storyMenus:storyMenusArray];
     menu.delegate = self;
     [self.view addSubview:menu];
     [menu release];
 }
 
-- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectAtIndex:(NSInteger)index
-{
+- (void)tappedInStoryMenu:(StoryMenu *)storyMenu didSelectAtIndex:(NSInteger)index {
     NSLog(@"Select the index : %d",index);
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 @end
