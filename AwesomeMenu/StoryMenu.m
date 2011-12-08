@@ -9,11 +9,11 @@
 #import "StoryMenu.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define NEARRADIUS 130.0f
-#define ENDRADIUS 140.0f
-#define FARRADIUS 160.0f
-#define STARTPOINT CGPointMake(50, 430)
-#define TIMEOFFSET 0.026f
+#define TIME_OFFSET 0.026f
+#define NEAR_RADIUS 130.0f
+#define END_RADIUS 140.0f
+#define FAR_RADIUS 160.0f
+#define STORY_MENU_CENTER_POINT CGPointMake(50, 430)
 
 @interface StoryMenu ()
 
@@ -51,7 +51,7 @@
                                         backgroundImage:[UIImage imageNamed:@"story-add-button.png"]
                                         highlightedBackgroundImage:[UIImage imageNamed:@"story-add-button-pressed.png"]];
         self.storyMenu.delegate = self;
-        self.storyMenu.center = STARTPOINT;
+        self.storyMenu.center = STORY_MENU_CENTER_POINT;
         [self addSubview:_storyMenu];
     }
     return self;
@@ -63,10 +63,10 @@
     for (int i = 0; i < count; i ++) {
         StoryMenuItem *item = [_storyMenus objectAtIndex:i];
         item.tag = 1000 + i;
-        item.startPoint = STARTPOINT;
-        item.endPoint = CGPointMake(STARTPOINT.x + ENDRADIUS * sinf(i * M_PI_2 / (count - 1)), STARTPOINT.y - ENDRADIUS * cosf(i * M_PI_2 / (count - 1)));
-        item.nearPoint = CGPointMake(STARTPOINT.x + NEARRADIUS * sinf(i * M_PI_2 / (count - 1)), STARTPOINT.y - NEARRADIUS * cosf(i * M_PI_2 / (count - 1)));
-        item.farPoint = CGPointMake(STARTPOINT.x + FARRADIUS * sinf(i * M_PI_2 / (count - 1)), STARTPOINT.y - FARRADIUS * cosf(i * M_PI_2 / (count - 1)));
+        item.startPoint = STORY_MENU_CENTER_POINT;
+        item.endPoint = CGPointMake(STORY_MENU_CENTER_POINT.x + END_RADIUS * sinf(i * M_PI_2 / (count - 1)), STORY_MENU_CENTER_POINT.y - END_RADIUS * cosf(i * M_PI_2 / (count - 1)));
+        item.nearPoint = CGPointMake(STORY_MENU_CENTER_POINT.x + NEAR_RADIUS * sinf(i * M_PI_2 / (count - 1)), STORY_MENU_CENTER_POINT.y - NEAR_RADIUS * cosf(i * M_PI_2 / (count - 1)));
+        item.farPoint = CGPointMake(STORY_MENU_CENTER_POINT.x + FAR_RADIUS * sinf(i * M_PI_2 / (count - 1)), STORY_MENU_CENTER_POINT.y - FAR_RADIUS * cosf(i * M_PI_2 / (count - 1)));
         item.center = item.startPoint;
         item.delegate = self;
         [self addSubview:item];
@@ -156,7 +156,7 @@
     if (!_timer) {
         _flag = self.isExpanding ? 0 : 5;
         SEL selector = self.isExpanding ? @selector(expandStoryMenu) : @selector(closeStoryMenu);
-        _timer = [[NSTimer scheduledTimerWithTimeInterval:TIMEOFFSET target:self selector:selector userInfo:nil repeats:YES] retain];
+        _timer = [[NSTimer scheduledTimerWithTimeInterval:TIME_OFFSET target:self selector:selector userInfo:nil repeats:YES] retain];
     }
 }
 
@@ -183,8 +183,8 @@
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, item.startPoint.x, item.startPoint.y);
     CGPathAddLineToPoint(path, NULL, item.farPoint.x, item.farPoint.y);
-    CGPathAddLineToPoint(path, NULL, item.nearPoint.x, item.nearPoint.y); 
-    CGPathAddLineToPoint(path, NULL, item.endPoint.x, item.endPoint.y); 
+    CGPathAddLineToPoint(path, NULL, item.nearPoint.x, item.nearPoint.y);
+    CGPathAddLineToPoint(path, NULL, item.endPoint.x, item.endPoint.y);
     positionAnimation.path = path;
     CGPathRelease(path);
     
@@ -196,7 +196,7 @@
     [item.layer addAnimation:animationgroup forKey:@"Expand"];
     item.center = item.endPoint;
     
-    _flag ++;
+    _flag++;
 }
 
 - (void)closeStoryMenu {
@@ -214,16 +214,16 @@
     rotateAnimation.values = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0f],[NSNumber numberWithFloat:M_PI * 2],[NSNumber numberWithFloat:0.0f], nil];
     rotateAnimation.duration = 0.5f;
     rotateAnimation.keyTimes = [NSArray arrayWithObjects:
-                                [NSNumber numberWithFloat:.0], 
+                                [NSNumber numberWithFloat:.0],
                                 [NSNumber numberWithFloat:.4],
-                                [NSNumber numberWithFloat:.5], nil]; 
+                                [NSNumber numberWithFloat:.5], nil];
     
     CAKeyframeAnimation *positionAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     positionAnimation.duration = 0.5f;
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, item.endPoint.x, item.endPoint.y);
     CGPathAddLineToPoint(path, NULL, item.farPoint.x, item.farPoint.y);
-    CGPathAddLineToPoint(path, NULL, item.startPoint.x, item.startPoint.y); 
+    CGPathAddLineToPoint(path, NULL, item.startPoint.x, item.startPoint.y);
     positionAnimation.path = path;
     CGPathRelease(path);
     
@@ -234,7 +234,8 @@
     animationgroup.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     [item.layer addAnimation:animationgroup forKey:@"Close"];
     item.center = item.startPoint;
-    _flag --;
+    
+    _flag--;
 }
 
 - (CAAnimationGroup *)blowupAnimationAtPoint:(CGPoint)point {
