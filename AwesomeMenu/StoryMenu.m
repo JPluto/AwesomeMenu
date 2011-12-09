@@ -36,8 +36,8 @@
 @synthesize storyMenu = _storyMenu;
 @synthesize storyMenus = _storyMenus;
 
-- (id)initWithFrame:(CGRect)frame storyMenus:(NSArray *)aStoryMenus {
-    if ((self = [super initWithFrame:frame])) {
+- (id)initWithStoryMenus:(NSArray *)aStoryMenus {
+    if ((self = [super initWithFrame:CGRectMake(0, 0, 320, 480)])) {
         self.backgroundColor = [UIColor clearColor];
         
         _storyMenus = [aStoryMenus copy];

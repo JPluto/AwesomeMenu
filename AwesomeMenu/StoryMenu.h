@@ -29,6 +29,6 @@
 @property (nonatomic, assign) id<StoryMenuDelegate> delegate;
 @property (nonatomic, retain, readonly) StoryMenuItem *storyMenu;
 
-- (id)initWithFrame:(CGRect)frame storyMenus:(NSArray *)aStoryMenus;
+- (id)initWithStoryMenus:(NSArray *)aStoryMenus;
 
 @end

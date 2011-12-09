@@ -36,10 +36,10 @@
         [storyMenusArray addObject:menuItem];
     }
 
-    StoryMenu *menu = [[StoryMenu alloc] initWithFrame:self.view.bounds storyMenus:storyMenusArray];
-    menu.delegate = self;
-    [self.view addSubview:menu];
-    [menu release];
+    StoryMenu *storyMenu = [[StoryMenu alloc] initWithStoryMenus:storyMenusArray];
+    storyMenu.delegate = self;
+    [self.view addSubview:storyMenu];
+    [storyMenu release];
 }
 
 - (void)tappedInStoryMenu:(StoryMenu *)storyMenu didSelectAtIndex:(NSInteger)index {
